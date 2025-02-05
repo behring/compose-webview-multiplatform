@@ -65,7 +65,7 @@ actual fun defaultWebViewFactory(param: WebViewFactoryParam): NativeWebView =
                 content.url,
                 param.rendering,
                 param.transparent,
-                param.requestContext,
+//                param.requestContext,
             )
         is WebContent.Data ->
             param.client.createBrowserWithHtml(

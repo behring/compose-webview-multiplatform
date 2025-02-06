@@ -3,7 +3,7 @@ plugins {
     // in each subproject's classloader
     kotlin("multiplatform").apply(false)
     kotlin("plugin.serialization").apply(false)
-    id("com.android.application").apply(false)
+    id("com.android.application") version "8.5.2" apply false
     id("com.android.library").apply(false)
     id("org.jetbrains.compose").apply(false)
     id("org.jetbrains.dokka")

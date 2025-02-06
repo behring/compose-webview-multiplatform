@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform").apply(false)
     kotlin("plugin.serialization").apply(false)
     id("com.android.application") version "8.5.2" apply false
-    id("com.android.library").apply(false)
+    id("com.android.library") version "8.5.2" apply false
     id("org.jetbrains.compose").apply(false)
     id("org.jetbrains.dokka")
     id("com.vanniktech.maven.publish") version "0.25.3" apply false

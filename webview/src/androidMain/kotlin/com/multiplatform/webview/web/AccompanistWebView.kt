@@ -14,6 +14,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -206,6 +207,21 @@ fun AccompanistWebView(
                         loadsImagesAutomatically = it.loadsImagesAutomatically
                         domStorageEnabled = it.domStorageEnabled
                         mediaPlaybackRequiresUserGesture = it.mediaPlaybackRequiresUserGesture
+
+                        loadsImagesAutomatically = true
+                        allowContentAccess = true
+                        useWideViewPort = true
+                        loadWithOverviewMode = true
+                        domStorageEnabled = true
+                        isHorizontalScrollBarEnabled = false
+                        settings.databaseEnabled = true
+
+                        isVerticalScrollBarEnabled = false
+                        settings.builtInZoomControls = true
+                        settings.displayZoomControls = false
+                        settings.allowFileAccess = true
+                        isScrollbarFadingEnabled = false
+                        setInitialScale(1)
                     }
                 }
                 if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
@@ -332,6 +348,7 @@ open class AccompanistWebViewClient : WebViewClient() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun shouldOverrideUrlLoading(
         view: WebView?,
         request: WebResourceRequest?,
@@ -379,6 +396,8 @@ open class AccompanistWebViewClient : WebViewClient() {
                 }
                 true
             }
+
+            else -> true
         }
     }
 }

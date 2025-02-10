@@ -1,8 +1,10 @@
 package com.multiplatform.webview.cookie
 
+import android.os.Build
 import androidx.webkit.CookieManagerCompat
 import androidx.webkit.WebViewFeature
 import com.multiplatform.webview.util.KLogger
+import com.multiplatform.webview.web.NativeWebView
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -14,12 +16,15 @@ import java.util.TimeZone
  */
 object AndroidCookieManager : CookieManager {
     private val androidCookieManager = android.webkit.CookieManager.getInstance()
-
+    init {
+        androidCookieManager.setAcceptCookie(true)
+    }
     override suspend fun setCookie(
         url: String,
         cookie: Cookie,
     ) {
         androidCookieManager.setCookie(url, cookie.toString())
+        androidCookieManager.flush()
     }
 
     override suspend fun getCookies(url: String): List<Cookie> {
@@ -150,6 +155,10 @@ object AndroidCookieManager : CookieManager {
      */
     override suspend fun removeCookies(url: String) {
         // TODO
+    }
+
+    override fun setAcceptThirdPartyCookies(webView: NativeWebView?, accept: Boolean) {
+       androidCookieManager.setAcceptThirdPartyCookies(webView, accept)
     }
 }
 

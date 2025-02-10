@@ -1,5 +1,7 @@
 package com.multiplatform.webview.cookie
 
+import com.multiplatform.webview.web.NativeWebView
+
 /**
  * Cookie Manager exposing access to cookies of the WebView.
  * This is an interface to allow platform specific implementations.
@@ -36,6 +38,9 @@ interface CookieManager {
      * @param url The url for which the cookies are to be removed.
      * */
     suspend fun removeCookies(url: String)
+
+
+    fun setAcceptThirdPartyCookies(webView: NativeWebView?, accept: Boolean)
 }
 
 /**

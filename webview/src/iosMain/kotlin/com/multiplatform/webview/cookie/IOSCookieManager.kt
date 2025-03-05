@@ -1,6 +1,7 @@
 package com.multiplatform.webview.cookie
 
 import com.multiplatform.webview.util.KLogger
+import com.multiplatform.webview.web.NativeWebView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import platform.Foundation.NSDate
@@ -85,6 +86,9 @@ object IOSCookieManager : CookieManager {
                 it.resume(Unit, {})
             }
         }
+
+    override fun setAcceptThirdPartyCookies(webView: NativeWebView?, accept: Boolean) {
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun setCookie(

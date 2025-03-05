@@ -209,6 +209,12 @@ sealed class PlatformWebSettings {
      * IOS web settings
      */
     data class IOSWebSettings(
+
+        /**
+         * enable the inspector.
+        * */
+
+        var isInspectable: Boolean = false,
         /**
          * The ios default opaque display
          * The default value is {@code false}.

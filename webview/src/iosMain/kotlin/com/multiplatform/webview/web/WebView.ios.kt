@@ -117,8 +117,8 @@ fun IOSWebView(
                     observer = observer,
                 )
                 this.navigationDelegate = navigationDelegate
-
                 state.webSettings.let {
+                    setInspectable(it.iOSWebSettings.isInspectable)
                     val backgroundColor =
                         (it.iOSWebSettings.backgroundColor ?: it.backgroundColor).toUIColor()
                     val scrollViewColor =

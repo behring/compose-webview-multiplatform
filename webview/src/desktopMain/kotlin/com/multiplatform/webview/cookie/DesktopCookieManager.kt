@@ -1,6 +1,7 @@
 package com.multiplatform.webview.cookie
 
 import com.multiplatform.webview.util.KLogger
+import com.multiplatform.webview.web.NativeWebView
 import dev.datlag.kcef.KCEFCookieManager
 import org.cef.network.CefCookie
 import java.text.SimpleDateFormat
@@ -55,6 +56,9 @@ object DesktopCookieManager : CookieManager {
 
     override suspend fun removeCookies(url: String) {
         KCEFCookieManager.instance.deleteCookies(url)
+    }
+
+    override fun setAcceptThirdPartyCookies(webView: NativeWebView?, accept: Boolean) {
     }
 }
 

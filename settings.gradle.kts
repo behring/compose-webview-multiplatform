@@ -1,10 +1,5 @@
 rootProject.name = "compose-webview-multiplatform"
 
-include(":sample:androidApp")
-include(":webview")
-include(":sample:desktopApp")
-include(":sample:shared")
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -27,6 +22,8 @@ pluginManagement {
         id("com.android.library").version(agpVersion)
 
         id("org.jetbrains.compose").version(composeVersion)
+        id("org.jetbrains.kotlin.multiplatform").version(kotlinVersion)
+        id("org.jetbrains.kotlin.plugin.compose").version(kotlinVersion)
         id("org.jetbrains.dokka").version("1.9.0")
     }
 }
@@ -40,3 +37,7 @@ dependencyResolutionManagement {
     }
 }
 include(":shared")
+include(":sample:androidApp")
+include(":webview")
+include(":sample:desktopApp")
+include(":sample:shared")

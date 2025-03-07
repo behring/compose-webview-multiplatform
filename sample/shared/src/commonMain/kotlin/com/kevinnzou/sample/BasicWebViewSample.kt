@@ -54,7 +54,9 @@ import kotlinx.coroutines.flow.filter
 @Composable
 internal fun BasicWebViewSample(navHostController: NavHostController? = null) {
     val initialUrl = "https://github.com/KevinnZou/compose-webview-multiplatform"
-    val state = rememberWebViewState(url = initialUrl)
+    val state = rememberWebViewState(url = initialUrl).apply {
+        webSettings.iOSWebSettings.isInspectable = true
+    }
     DisposableEffect(Unit) {
         state.webSettings.apply {
             logSeverity = KLogSeverity.Debug
@@ -128,7 +130,7 @@ internal fun BasicWebViewSample(navHostController: NavHostController? = null) {
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
-
+            CookieSample(state)
             WebView(
                 state = state,
                 modifier =

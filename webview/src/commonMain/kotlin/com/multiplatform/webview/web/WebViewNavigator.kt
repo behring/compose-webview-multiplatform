@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import com.multiplatform.webview.request.RequestInterceptor
+import com.multiplatform.webview.util.KLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -122,6 +123,9 @@ class WebViewNavigator(val coroutineScope: CoroutineScope, val requestIntercepto
     internal suspend fun IWebView.handleNavigationEvents(): Nothing =
         withContext(Dispatchers.Main) {
             navigationEvents.collect { event ->
+                KLogger.d {
+                    "WebViewNavigator handleNavigationEvents: $event"
+                }
                 when (event) {
                     is NavigationEvent.Back -> goBack()
                     is NavigationEvent.Forward -> goForward()
@@ -149,6 +153,9 @@ class WebViewNavigator(val coroutineScope: CoroutineScope, val requestIntercepto
                     }
 
                     is NavigationEvent.EvaluateJavaScript -> {
+                        KLogger.d {
+                            "NavigationEvent EvaluateJavaScript: $event.script"
+                        }
                         evaluateJavaScript(event.script, event.callback)
                     }
                 }
@@ -256,6 +263,9 @@ class WebViewNavigator(val coroutineScope: CoroutineScope, val requestIntercepto
         callback: ((String) -> Unit)? = null,
     ) {
         coroutineScope.launch {
+            KLogger.d {
+                "navigationEvents.emit js: $navigationEvents"
+            }
             navigationEvents.emit(
                 NavigationEvent.EvaluateJavaScript(
                     script,

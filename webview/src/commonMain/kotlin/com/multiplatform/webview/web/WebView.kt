@@ -3,6 +3,10 @@ package com.multiplatform.webview.web
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import com.multiplatform.webview.jsbridge.WebViewJsBridge
@@ -79,18 +83,7 @@ fun WebView(
     platformWebViewParams: PlatformWebViewParams? = null,
     factory: ((WebViewFactoryParam) -> NativeWebView)? = null,
 ) {
-    val webView = state.webView
-
-    webView?.let { wv ->
-        LaunchedEffect(wv, navigator) {
-            with(navigator) {
-                KLogger.d {
-                    "wv.handleNavigationEvents()"
-                }
-                wv.handleNavigationEvents()
-            }
-        }
-
+    state.webView?.let { wv ->
         // Desktop will handle the first load by itself
         if (!getPlatform().isDesktop()) {
             LaunchedEffect(wv, state) {

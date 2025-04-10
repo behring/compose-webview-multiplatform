@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.SwingPanel
 import com.multiplatform.webview.jsbridge.WebViewJsBridge
+import com.multiplatform.webview.util.KLogger
 import compose_webview_multiplatform.webview.generated.resources.Res
 import dev.datlag.kcef.KCEF
 import dev.datlag.kcef.KCEFBrowser
@@ -152,6 +153,14 @@ fun DesktopWebView(
             },
             modifier = modifier,
         )
+        LaunchedEffect(state.webView, navigator) {
+            with(navigator) {
+                KLogger.d {
+                    "wv.handleNavigationEvents()"
+                }
+                state.webView?.handleNavigationEvents()
+            }
+        }
     }
 
     DisposableEffect(Unit) {

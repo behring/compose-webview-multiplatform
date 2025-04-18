@@ -2,6 +2,7 @@ package com.multiplatform.webview.web
 
 import com.multiplatform.webview.request.WebRequest
 import com.multiplatform.webview.request.WebRequestInterceptResult
+import com.multiplatform.webview.response.WebResponse
 import com.multiplatform.webview.util.KLogger
 import dev.datlag.kcef.KCEFBrowser
 import org.cef.CefSettings
@@ -10,6 +11,9 @@ import org.cef.browser.CefFrame
 import org.cef.handler.CefDisplayHandler
 import org.cef.handler.CefLoadHandler
 import org.cef.handler.CefRequestHandlerAdapter
+import org.cef.handler.CefResourceRequestHandler
+import org.cef.handler.CefResourceRequestHandlerAdapter
+import org.cef.misc.BoolRef
 import org.cef.network.CefRequest
 import kotlin.math.abs
 import kotlin.math.ln
@@ -216,6 +220,53 @@ internal fun KCEFBrowser.addRequestHandler(
                     }
                 }
                 return super.onBeforeBrowse(browser, frame, request, userGesture, isRedirect)
+            }
+
+            override fun getResourceRequestHandler(
+                browser: CefBrowser?,
+                frame: CefFrame?,
+                request: CefRequest?,
+                isNavigation: Boolean,
+                isDownload: Boolean,
+                requestInitiator: String?,
+                disableDefaultHandling: BoolRef?
+            ): CefResourceRequestHandler? {
+                KLogger.d { "getResourceRequestHandler called for ${request?.url}" }
+
+                return object : CefResourceRequestHandlerAdapter() {
+                    override fun onBeforeResourceLoad(
+                        browser: CefBrowser?,
+                        frame: CefFrame?,
+                        request: CefRequest?
+                    ): Boolean {
+                        KLogger.d { "[onBeforeResourceLoad] ${request?.method} ${request?.url}" }
+                        return false
+                    }
+
+                    override fun onResourceResponse(
+                        browser: CefBrowser?,
+                        frame: CefFrame?,
+                        request: CefRequest?,
+                        response: org.cef.network.CefResponse?
+                    ): Boolean {
+                        val url = request?.url ?: return false
+
+                        navigator.receiveResourceResponse?.let {
+                            val headers = mutableMapOf<String, String>()
+                            response?.getHeaderMap(headers)
+                            it.onResourceResponse(
+                                WebResponse(
+                                    url = url,
+                                    headers = headers,
+                                    isForMainFrame = frame?.isMain == true,
+                                    method = request.method,
+                                ),
+                                navigator
+                            )
+                        }
+                        return false
+                    }
+                }
             }
         },
     )

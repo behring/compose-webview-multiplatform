@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import com.multiplatform.webview.request.RequestInterceptor
+import com.multiplatform.webview.response.ReceiveResourceResponse
 import com.multiplatform.webview.util.KLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,11 @@ import kotlinx.coroutines.withContext
  * @see [rememberWebViewNavigator]
  */
 @Stable
-class WebViewNavigator(val coroutineScope: CoroutineScope, val requestInterceptor: RequestInterceptor? = null) {
+class WebViewNavigator(
+    val coroutineScope: CoroutineScope,
+    val requestInterceptor: RequestInterceptor? = null,
+    val receiveResourceResponse: ReceiveResourceResponse? = null,
+) {
     /**
      * Sealed class for constraining possible navigation events.
      */
@@ -312,4 +317,6 @@ class WebViewNavigator(val coroutineScope: CoroutineScope, val requestIntercepto
 fun rememberWebViewNavigator(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     requestInterceptor: RequestInterceptor? = null,
-): WebViewNavigator = remember(coroutineScope) { WebViewNavigator(coroutineScope, requestInterceptor) }
+    receiveResourceResponse: ReceiveResourceResponse? = null,
+): WebViewNavigator =
+    remember(coroutineScope) { WebViewNavigator(coroutineScope, requestInterceptor, receiveResourceResponse) }

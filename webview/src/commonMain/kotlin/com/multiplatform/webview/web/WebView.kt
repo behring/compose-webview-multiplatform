@@ -86,6 +86,15 @@ fun WebView(
     state.webView?.let { wv ->
         // Desktop will handle the first load by itself
         if (!getPlatform().isDesktop()) {
+            LaunchedEffect(wv, navigator) {
+                with(navigator) {
+                    KLogger.d {
+                        "wv.handleNavigationEvents()"
+                    }
+                    wv.handleNavigationEvents()
+                }
+            }
+
             LaunchedEffect(wv, state) {
                 snapshotFlow { state.content }.collect { content ->
                     when (content) {

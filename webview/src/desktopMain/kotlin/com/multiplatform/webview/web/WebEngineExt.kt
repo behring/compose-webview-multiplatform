@@ -252,12 +252,16 @@ internal fun KCEFBrowser.addRequestHandler(
                         val url = request?.url ?: return false
 
                         navigator.receiveResourceResponse?.let {
+                            // TODO: Add new api to support multiple values for the same header.
+//                            val headers = response?.getHeaderMultiMap()
                             val headers = mutableMapOf<String, String>()
                             response?.getHeaderMap(headers)
                             it.onResourceResponse(
                                 WebResponse(
                                     url = url,
-                                    headers = headers,
+                                    headers = headers.mapValues { (_, value) ->
+                                        listOf(value)
+                                    }.toMutableMap(),
                                     isForMainFrame = frame?.isMain == true,
                                     method = request.method,
                                 ),

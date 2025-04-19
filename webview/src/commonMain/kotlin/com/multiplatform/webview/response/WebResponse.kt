@@ -5,7 +5,7 @@ package com.multiplatform.webview.response
  */
 data class WebResponse(
     val url: String,
-    val headers: MutableMap<String, String> = mutableMapOf(),
+    val headers: Map<String, List<String>> = mutableMapOf(),
     val isForMainFrame: Boolean = false,
     val method: String = "GET",
 )

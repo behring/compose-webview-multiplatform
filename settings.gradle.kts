@@ -34,6 +34,7 @@ dependencyResolutionManagement {
         google()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         maven { url = uri("https://jitpack.io") }
+        mavenCentral()
     }
 }
 include(":shared")

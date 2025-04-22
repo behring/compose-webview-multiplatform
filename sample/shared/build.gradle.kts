@@ -47,7 +47,7 @@ kotlin {
                 api(project(":webview"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
                 implementation("org.jetbrains.kotlinx:atomicfu:0.23.2")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
                 implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha08")
             }
         }
@@ -55,13 +55,13 @@ kotlin {
             dependencies {
                 api("androidx.activity:activity-compose:1.8.2")
                 api("androidx.appcompat:appcompat:1.6.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
             }
         }
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.10.2")
             }
         }
         val commonTest by getting {

@@ -39,7 +39,7 @@ kotlin {
                 implementation(compose.foundation)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
                 implementation("co.touchlab:kermit:2.0.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
             }
@@ -48,7 +48,7 @@ kotlin {
             dependencies {
                 api("androidx.activity:activity-compose:1.8.2")
                 api("androidx.webkit:webkit:1.10.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
             }
         }
         val iosX64Main by getting
@@ -64,7 +64,7 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.common)
                 api("dev.datlag:kcef:2024.04.20.4")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.10.2")
             }
         }
     }

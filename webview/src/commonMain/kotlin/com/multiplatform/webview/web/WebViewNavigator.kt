@@ -123,10 +123,10 @@ class WebViewNavigator(
     /**
      * Handles navigation events from the composable and calls the appropriate method on the
      * [IWebView].
-     * Use Dispatchers.Default to ensure that the webview methods are called on UI thread
+     * Use Dispatchers.Main to ensure that the webview methods are called on UI thread
      */
     internal suspend fun IWebView.handleNavigationEvents(): Nothing =
-        withContext(Dispatchers.Default) {
+        withContext(Dispatchers.Main) {
             navigationEvents.collect { event ->
                 KLogger.d {
                     "WebViewNavigator handleNavigationEvents: $event"

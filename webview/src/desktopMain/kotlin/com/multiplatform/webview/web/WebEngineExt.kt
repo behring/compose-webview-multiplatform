@@ -51,7 +51,7 @@ internal fun CefBrowser.addDisplayHandler(state: WebViewState) {
                         -ln(abs(givenZoomLevel)) / ln(1.2)
                     }
                 KLogger.d { "titleProperty: $title" }
-                zoomLevel = givenZoomLevel
+                zoomLevel = realZoomLevel
                 state.pageTitle = title
             }
 

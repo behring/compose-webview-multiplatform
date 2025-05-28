@@ -145,7 +145,6 @@ fun DesktopWebView(
                 state.webView = desktopWebView
                 webViewJsBridge?.webView = desktopWebView
                 browser.apply {
-                    zoomLevel = state.webSettings.zoomLevel
                     addDisplayHandler(state)
                     addLoadListener(state, navigator)
                     addRequestHandler(state, navigator)

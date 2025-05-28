@@ -239,6 +239,9 @@ internal fun KCEFBrowser.addRequestHandler(
                         frame: CefFrame?,
                         request: CefRequest?
                     ): Boolean {
+                        if (!state.webSettings.customUserAgentString.isNullOrEmpty()) {
+                            request?.setHeaderByName("User-Agent", state.webSettings.customUserAgentString, true)
+                        }
                         KLogger.d { "[onBeforeResourceLoad] ${request?.method} ${request?.url}" }
                         return false
                     }

@@ -51,7 +51,7 @@ internal fun CefBrowser.addDisplayHandler(state: WebViewState) {
                         -ln(abs(givenZoomLevel)) / ln(1.2)
                     }
                 KLogger.d { "titleProperty: $title" }
-                zoomLevel = realZoomLevel
+                zoomLevel = givenZoomLevel
                 state.pageTitle = title
             }
 
@@ -240,7 +240,11 @@ internal fun KCEFBrowser.addRequestHandler(
                         request: CefRequest?
                     ): Boolean {
                         if (!state.webSettings.customUserAgentString.isNullOrEmpty()) {
-                            request?.setHeaderByName("User-Agent", state.webSettings.customUserAgentString, true)
+                            request?.setHeaderByName(
+                                "User-Agent",
+                                state.webSettings.customUserAgentString,
+                                true
+                            )
                         }
                         KLogger.d { "[onBeforeResourceLoad] ${request?.method} ${request?.url}" }
                         return false

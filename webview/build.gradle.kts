@@ -107,13 +107,5 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.setUpiOSObserver()
 
 mavenPublishing {
     publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.S01, automaticRelease = true)
-    if (System.getenv("JITPACK") != "true") {
-        signAllPublications()
-        // 在 Central 使用期望的根发布 artifactId
-        coordinates(
-            findProperty("GROUP").toString(),
-            findProperty("POM_ARTIFACT_ID").toString(),
-            findProperty("VERSION_NAME").toString()
-        )
-    }
+    signAllPublications()
 }

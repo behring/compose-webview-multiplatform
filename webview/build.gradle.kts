@@ -16,6 +16,7 @@ kotlin {
 
     androidTarget {
         publishLibraryVariants("release")
+        publishLibraryVariantsGroupedByFlavor = false
     }
 
     jvm("desktop")

@@ -23,3 +23,6 @@ sample/desktopApp/GPUCache
 sample/desktopApp/*.log
 site
 .kotlin
+# Local Gradle properties with sensitive data
+~/.gradle/gradle.properties
+local.properties
